@@ -1,0 +1,151 @@
+<DOCTYPE html>
+<html>
+<head>
+	<title>realGame javascript vertion</title>
+	<style>
+		#canvas{
+			border:2px solid black;
+			background-color:#333399;
+		}
+	</style>
+</head>
+<body>
+	<h1>The javascript vertion of my game</h1>	
+	<canvas id="canvas" width="500" height="400"> </canvas>
+	<script>
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		var playerX = 200;
+		var rectY = 0;
+		var random1 = Math.floor(Math.random() * 21);
+		var random2 = Math.floor(Math.random() * 21);
+		var random3 = Math.floor(Math.random() * 21);
+		var random4 = Math.floor(Math.random() * 21);
+		var random5 = Math.floor(Math.random() * 21);
+
+		document.addEventListener("keydown", KeyDownHandler, false);
+		//document.addEventListener("keyup",KeyUpHandler, false);
+
+		function KeyDownHandler(e){
+			if(e.keyCode == 39){
+				if(playerX < canvas.width - 100){
+				console.log(playerX);
+				playerX += 100
+				}
+			}		
+			else if(e.keyCode == 37){
+				if(playerX > 0){
+				console.log(playerX);
+				playerX -= 100
+				}
+			}
+		
+			
+		}
+		/*function KeyUpHandler(e){
+			if(e.keyCode == 39){
+				rightPressed = false;
+			}
+			else if(e.keyCode == 37){
+				leftPressed = false;
+			}
+		}*/
+		function drawPlayer(){
+			ctx.beginPath();
+			ctx.rect(playerX,300,100,100);
+			ctx.fillStyle = "purple";
+			ctx.fill()
+			ctx.closePath;
+		}
+		function randomRect(){
+			if(random1 > 10){
+				ctx.beginPath();
+				ctx.rect(0,rectY,100,100);
+				ctx.fillStyle = "red";
+				ctx.fill()
+				ctx.closePath();
+			}
+			if(random2 > 10){
+				ctx.beginPath();
+				ctx.rect(100,rectY,100,100);
+				ctx.fillStyle = "red";
+				ctx.fill()
+				ctx.closePath();
+			}
+			if(random3 > 10){
+				ctx.beginPath();
+				ctx.rect(200,rectY,100,100);
+				ctx.fillStyle = "red";
+				ctx.fill()
+				ctx.closePath();
+			}
+			if(random4 > 10){
+				ctx.beginPath();
+				ctx.rect(300,rectY,100,100);
+				ctx.fillStyle = "red";
+
+				ctx.fill()
+				ctx.closePath();
+			}
+			if(random5 > 10){
+				ctx.beginPath();
+				ctx.rect(400,rectY,100,100);
+				ctx.fillStyle = "red";
+				ctx.fill();
+				ctx.closePath();
+			}
+		}
+		function drawGameOver(){
+			ctx.font="50px Georgia";
+			ctx.fillText("Game Over",100,100)
+
+		}
+		function checkCol(){
+			if(rectY >= 400){
+				if(random1 > 10 && playerX == 0){
+					console.log("toast")
+					clearInterval(repaint)
+					drawGameOver()
+				}
+				if(random2 > 10 && playerX == 100){
+					console.log("toast")
+					clearInterval(repaint)
+					drawGameOver()
+				}
+				if(random3 > 10 && playerX == 200){
+					console.log("toast")
+					clearInterval(repaint)
+					drawGameOver()
+				}
+				if(random4 > 10 && playerX == 300){
+					console.log("toast")
+					clearInterval(repaint)
+					drawGameOver()
+				}
+				if(random5 > 10 && playerX == 400){
+					console.log("toast")
+					clearInterval(repaint)
+					drawGameOver()
+				}
+			}
+		}
+		function draw(){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			randomRect();
+			drawPlayer();
+			checkCol();
+			rectY += 5;
+			if(rectY > 500){
+				rectY = 0;
+				random1 = Math.floor(Math.random() * 21);
+				random2 = Math.floor(Math.random() * 21);
+				random3 = Math.floor(Math.random() * 21);
+				random4 = Math.floor(Math.random() * 21);
+				random5 = Math.floor(Math.random() * 21);	
+			}
+		}		
+		var repaint = setInterval(draw,10)
+					
+	</script>
+</body>
+</html>
