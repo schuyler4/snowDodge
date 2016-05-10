@@ -22,6 +22,7 @@
 		var random3 = Math.floor(Math.random() * 21);
 		var random4 = Math.floor(Math.random() * 21);
 		var random5 = Math.floor(Math.random() * 21);
+		var score = 0;
 
 		document.addEventListener("keydown", KeyDownHandler, false);
 		//document.addEventListener("keyup",KeyUpHandler, false);
@@ -95,6 +96,11 @@
 				ctx.closePath();
 			}
 		}
+		function score(){
+			ctx.font="50px Georgia"
+			ctx.fillText(score,100,100)
+			
+		}
 		function drawGameOver(){
 			ctx.font="50px Georgia";
 			ctx.fillText("Game Over",100,100)
@@ -127,14 +133,18 @@
 					clearInterval(repaint)
 					drawGameOver()
 				}
+				else{
+					score += 1
+				}
 			}
 		}
 		function draw(){
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			randomRect();
 			drawPlayer();
+			score();
 			checkCol();
-			rectY += 5;
+			rectY += 5
 			if(rectY > 500){
 				rectY = 0;
 				random1 = Math.floor(Math.random() * 21);
